@@ -22,6 +22,14 @@ namespace Lab2
         private int[] histGray1;
         private int[] histGray2;
 
+        private Bitmap redImage;
+        private Bitmap greenImage;
+        private Bitmap blueImage;
+
+        private int[] histRed;
+        private int[] histGreen;
+        private int[] histBlue;
+
         private Bitmap MakeGray1(Bitmap source)
         {
             return source.Select(color =>
@@ -38,6 +46,66 @@ namespace Lab2
                 int gray = (int)Math.Round(0.2126 * color.R + 0.7152 * color.G + 0.0722 * color.B);
                 return Color.FromArgb(gray, gray, gray);
             });
+        }
+
+        private Bitmap MakeRed(Bitmap source)
+        {
+            return source.Select(color =>
+            {
+                return Color.FromArgb(color.R, 0, 0);
+            });
+        }
+
+        private Bitmap MakeGreen(Bitmap source)
+        {
+            return source.Select(color =>
+            {
+                return Color.FromArgb(0, color.G, 0);
+            });
+        }
+
+        private Bitmap MakeBlue(Bitmap source)
+        {
+            return source.Select(color =>
+            {
+                return Color.FromArgb(0, 0, color.B);
+            });
+        }
+
+        private int[] GetRedHistogram(Bitmap image)
+        {
+            int[] histogram = new int[256];
+
+            image.ForEach(color =>
+            {
+                histogram[color.R]++;
+            });
+
+            return histogram;
+        }
+
+        private int[] GetGreenHistogram(Bitmap image)
+        {
+            int[] histogram = new int[256];
+
+            image.ForEach(color =>
+            {
+                histogram[color.G]++;
+            });
+
+            return histogram;
+        }
+
+        private int[] GetBlueHistogram(Bitmap image)
+        {
+            int[] histogram = new int[256];
+
+            image.ForEach(color =>
+            {
+                histogram[color.B]++;
+            });
+
+            return histogram;
         }
 
         private Bitmap MakeDifference(Bitmap first, Bitmap second)
@@ -97,6 +165,28 @@ namespace Lab2
                 g.DrawLine(Pens.Black, x, height, x, height - lineHeight);
             }
         }
+
+        private void DrawColorHistogram(Graphics g, int[] histogram, int width, int height, Pen pen)
+        {
+            g.Clear(Color.White);
+
+            if (histogram == null)
+                return;
+
+            int max = histogram.Max();
+
+            if (max == 0)
+                return;
+
+            for (int i = 0; i < 256; i++)
+            {
+                float x = i * width / 256f;
+                float lineHeight = histogram[i] * height / (float)max;
+
+                g.DrawLine(pen, x, height, x, height - lineHeight);
+            }
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -113,6 +203,7 @@ namespace Lab2
                 originalImage = new Bitmap(dialog.FileName);
 
                 pictureOriginalGray.Image = originalImage;
+                pictureOriginalRGB.Image = originalImage;
             }
         }
 
@@ -148,6 +239,64 @@ namespace Lab2
         private void panelHistGray2_Paint(object sender, PaintEventArgs e)
         {
             DrawHistogram(e.Graphics, histGray2, panelHistGray2.Width, panelHistGray2.Height);
+        }
+
+        private void btnRGB_Click(object sender, EventArgs e)
+        {
+            if (originalImage == null)
+            {
+                MessageBox.Show("Сначала откройте изображение.");
+                return;
+            }
+
+            redImage = MakeRed(originalImage);
+            greenImage = MakeGreen(originalImage);
+            blueImage = MakeBlue(originalImage);
+
+            pictureRed.Image = redImage;
+            pictureGreen.Image = greenImage;
+            pictureBlue.Image = blueImage;
+
+            histRed = GetRedHistogram(originalImage);
+            histGreen = GetGreenHistogram(originalImage);
+            histBlue = GetBlueHistogram(originalImage);
+
+            panelHistRed.Invalidate();
+            panelHistGreen.Invalidate();
+            panelHistBlue.Invalidate();
+        }
+
+        private void panelHistRed_Paint(object sender, PaintEventArgs e)
+        {
+            DrawColorHistogram(
+                e.Graphics,
+                histRed,
+                panelHistRed.Width,
+                panelHistRed.Height,
+                Pens.Red
+            );
+        }
+
+        private void panelHistGreen_Paint(object sender, PaintEventArgs e)
+        {
+            DrawColorHistogram(
+                e.Graphics,
+                histGreen,
+                panelHistGreen.Width,
+                panelHistGreen.Height,
+                Pens.Green
+            );
+        }
+
+        private void panelHistBlue_Paint(object sender, PaintEventArgs e)
+        {
+            DrawColorHistogram(
+                e.Graphics,
+                histBlue,
+                panelHistBlue.Width,
+                panelHistBlue.Height,
+                Pens.Blue
+            );
         }
     }
 }
