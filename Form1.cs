@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using FastBitmap;
 using System.Drawing.Imaging;
@@ -61,68 +57,6 @@ namespace Lab2
                 return Color.FromArgb(gray, gray, gray);
             });
         }
-
-        //задание 2 - RGB
-        private Bitmap MakeRed(Bitmap source)
-        {
-            return source.Select(color =>
-            {
-                return Color.FromArgb(color.R, 0, 0);
-            });
-        }
-
-        private Bitmap MakeGreen(Bitmap source)
-        {
-            return source.Select(color =>
-            {
-                return Color.FromArgb(0, color.G, 0);
-            });
-        }
-
-        private Bitmap MakeBlue(Bitmap source)
-        {
-            return source.Select(color =>
-            {
-                return Color.FromArgb(0, 0, color.B);
-            });
-        }
-
-        private int[] GetRedHistogram(Bitmap image)
-        {
-            int[] histogram = new int[256];
-
-            image.ForEach(color =>
-            {
-                histogram[color.R]++;
-            });
-
-            return histogram;
-        }
-
-        private int[] GetGreenHistogram(Bitmap image)
-        {
-            int[] histogram = new int[256];
-
-            image.ForEach(color =>
-            {
-                histogram[color.G]++;
-            });
-
-            return histogram;
-        }
-
-        private int[] GetBlueHistogram(Bitmap image)
-        {
-            int[] histogram = new int[256];
-
-            image.ForEach(color =>
-            {
-                histogram[color.B]++;
-            });
-
-            return histogram;
-        }
-
         private Bitmap MakeDifference(Bitmap first, Bitmap second)
         {
             Bitmap result = new Bitmap(first.Width, first.Height);
@@ -179,6 +113,68 @@ namespace Lab2
                 float lineHeight = histogram[i] * height / (float)max;
                 g.DrawLine(Pens.Black, x, height, x, height - lineHeight);
             }
+        }
+
+        //задание 2 - RGB
+        private Bitmap MakeRed(Bitmap source)
+        {
+            return source.Select(color =>
+            {
+                return Color.FromArgb(color.R, 0, 0);
+            });
+        }
+
+        private Bitmap MakeGreen(Bitmap source)
+        {
+            return source.Select(color =>
+            {
+                return Color.FromArgb(0, color.G, 0);
+            });
+        }
+
+        private Bitmap MakeBlue(Bitmap source)
+        {
+            return source.Select(color =>
+            {
+                return Color.FromArgb(0, 0, color.B);
+            });
+        }
+
+
+        private int[] GetRedHistogram(Bitmap image)
+        {
+            int[] histogram = new int[256];
+
+            image.ForEach(color =>
+            {
+                histogram[color.R]++;
+            });
+
+            return histogram;
+        }
+
+        private int[] GetGreenHistogram(Bitmap image)
+        {
+            int[] histogram = new int[256];
+
+            image.ForEach(color =>
+            {
+                histogram[color.G]++;
+            });
+
+            return histogram;
+        }
+
+        private int[] GetBlueHistogram(Bitmap image)
+        {
+            int[] histogram = new int[256];
+
+            image.ForEach(color =>
+            {
+                histogram[color.B]++;
+            });
+
+            return histogram;
         }
 
         private void DrawColorHistogram(Graphics g, int[] histogram, int width, int height, Pen pen)
@@ -335,7 +331,8 @@ namespace Lab2
         {
             InitializeComponent();
         }
-        //обработчики задания 1
+
+        // загрузка изображения
         private void btnOpen_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
@@ -362,11 +359,12 @@ namespace Lab2
             }
         }
 
+        //обработчики задания 1
         private void btnGray_Click(object sender, EventArgs e)
         {
             if (originalImage == null)
             {
-                MessageBox.Show("Сначала откройте изображение.");
+                MessageBox.Show("Сначала загрузите изображение.");
                 return;
             }
 
@@ -401,7 +399,7 @@ namespace Lab2
         {
             if (originalImage == null)
             {
-                MessageBox.Show("Сначала откройте изображение.");
+                MessageBox.Show("Сначала загрузите изображение.");
                 return;
             }
 

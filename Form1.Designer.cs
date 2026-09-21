@@ -501,8 +501,8 @@
             // trackValue
             // 
             this.trackValue.Location = new System.Drawing.Point(793, 363);
-            this.trackValue.Maximum = 180;
-            this.trackValue.Minimum = -180;
+            this.trackValue.Maximum = 100;
+            this.trackValue.Minimum = -100;
             this.trackValue.Name = "trackValue";
             this.trackValue.Size = new System.Drawing.Size(300, 56);
             this.trackValue.TabIndex = 7;
