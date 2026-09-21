@@ -27,18 +27,21 @@ namespace Lab2
         private Bitmap redImage;
         private Bitmap greenImage;
         private Bitmap blueImage;
-        private Bitmap hsvImage;
+
+        private int[] histRed;
+        private int[] histGreen;
+        private int[] histBlue;
 
         //задание 3
+
+        private Bitmap hsvImage;
         private struct HSV
         {
             public double H;
             public double S;
             public double V;
         }
-        private int[] histRed;
-        private int[] histGreen;
-        private int[] histBlue;
+ 
 
         //задание 1 - оттенки серого
         private Bitmap MakeGray1(Bitmap source)
