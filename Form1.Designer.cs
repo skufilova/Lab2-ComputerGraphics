@@ -46,19 +46,40 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.pictureOriginalRGB = new System.Windows.Forms.PictureBox();
+            this.pictureRed = new System.Windows.Forms.PictureBox();
+            this.pictureGreen = new System.Windows.Forms.PictureBox();
+            this.pictureBlue = new System.Windows.Forms.PictureBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.btnRGB = new System.Windows.Forms.Button();
+            this.panelHistRed = new System.Windows.Forms.Panel();
+            this.panelHistGreen = new System.Windows.Forms.Panel();
+            this.panelHistBlue = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureDifference)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureGray2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureGray1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureOriginalGray)).BeginInit();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureOriginalRGB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureRed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureGreen)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBlue)).BeginInit();
             this.SuspendLayout();
             // 
             // btnOpen
             // 
-            this.btnOpen.Location = new System.Drawing.Point(933, 3);
+            this.btnOpen.Location = new System.Drawing.Point(1050, 4);
+            this.btnOpen.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnOpen.Name = "btnOpen";
-            this.btnOpen.Size = new System.Drawing.Size(211, 34);
+            this.btnOpen.Size = new System.Drawing.Size(237, 42);
             this.btnOpen.TabIndex = 0;
             this.btnOpen.Text = "Загрузить изображение";
             this.btnOpen.UseVisualStyleBackColor = true;
@@ -72,10 +93,11 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(-1, 41);
+            this.tabControl1.Location = new System.Drawing.Point(-1, 51);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1184, 614);
+            this.tabControl1.Size = new System.Drawing.Size(1332, 768);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPage1
@@ -93,10 +115,11 @@
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Location = new System.Drawing.Point(4, 29);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1176, 585);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabPage1.Size = new System.Drawing.Size(1324, 735);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Оттенки серого";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -105,9 +128,10 @@
             // 
             this.panelHistGray2.BackColor = System.Drawing.Color.White;
             this.panelHistGray2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelHistGray2.Location = new System.Drawing.Point(640, 338);
+            this.panelHistGray2.Location = new System.Drawing.Point(720, 422);
+            this.panelHistGray2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panelHistGray2.Name = "panelHistGray2";
-            this.panelHistGray2.Size = new System.Drawing.Size(450, 170);
+            this.panelHistGray2.Size = new System.Drawing.Size(506, 212);
             this.panelHistGray2.TabIndex = 12;
             this.panelHistGray2.Paint += new System.Windows.Forms.PaintEventHandler(this.panelHistGray2_Paint);
             // 
@@ -115,35 +139,37 @@
             // 
             this.panelHistGray1.BackColor = System.Drawing.Color.White;
             this.panelHistGray1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelHistGray1.Location = new System.Drawing.Point(75, 338);
+            this.panelHistGray1.Location = new System.Drawing.Point(84, 422);
+            this.panelHistGray1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panelHistGray1.Name = "panelHistGray1";
-            this.panelHistGray1.Size = new System.Drawing.Size(450, 170);
+            this.panelHistGray1.Size = new System.Drawing.Size(506, 212);
             this.panelHistGray1.TabIndex = 11;
             this.panelHistGray1.Paint += new System.Windows.Forms.PaintEventHandler(this.panelHistGray1_Paint);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(637, 319);
+            this.label6.Location = new System.Drawing.Point(717, 399);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(102, 16);
+            this.label6.Size = new System.Drawing.Size(122, 20);
             this.label6.TabIndex = 10;
             this.label6.Text = "Гистограмма 2";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(72, 319);
+            this.label5.Location = new System.Drawing.Point(81, 399);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(102, 16);
+            this.label5.Size = new System.Drawing.Size(122, 20);
             this.label5.TabIndex = 9;
             this.label5.Text = "Гистограмма 1";
             // 
             // btnGray
             // 
-            this.btnGray.Location = new System.Drawing.Point(930, 256);
+            this.btnGray.Location = new System.Drawing.Point(1046, 320);
+            this.btnGray.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnGray.Name = "btnGray";
-            this.btnGray.Size = new System.Drawing.Size(211, 34);
+            this.btnGray.Size = new System.Drawing.Size(237, 42);
             this.btnGray.TabIndex = 8;
             this.btnGray.Text = "Выполнить преобразование";
             this.btnGray.UseVisualStyleBackColor = true;
@@ -152,9 +178,10 @@
             // pictureDifference
             // 
             this.pictureDifference.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureDifference.Location = new System.Drawing.Point(901, 53);
+            this.pictureDifference.Location = new System.Drawing.Point(1014, 66);
+            this.pictureDifference.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pictureDifference.Name = "pictureDifference";
-            this.pictureDifference.Size = new System.Drawing.Size(240, 180);
+            this.pictureDifference.Size = new System.Drawing.Size(270, 224);
             this.pictureDifference.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureDifference.TabIndex = 7;
             this.pictureDifference.TabStop = false;
@@ -162,9 +189,10 @@
             // pictureGray2
             // 
             this.pictureGray2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureGray2.Location = new System.Drawing.Point(614, 53);
+            this.pictureGray2.Location = new System.Drawing.Point(691, 66);
+            this.pictureGray2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pictureGray2.Name = "pictureGray2";
-            this.pictureGray2.Size = new System.Drawing.Size(240, 180);
+            this.pictureGray2.Size = new System.Drawing.Size(270, 224);
             this.pictureGray2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureGray2.TabIndex = 6;
             this.pictureGray2.TabStop = false;
@@ -172,9 +200,10 @@
             // pictureGray1
             // 
             this.pictureGray1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureGray1.Location = new System.Drawing.Point(326, 53);
+            this.pictureGray1.Location = new System.Drawing.Point(367, 66);
+            this.pictureGray1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pictureGray1.Name = "pictureGray1";
-            this.pictureGray1.Size = new System.Drawing.Size(240, 180);
+            this.pictureGray1.Size = new System.Drawing.Size(270, 224);
             this.pictureGray1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureGray1.TabIndex = 5;
             this.pictureGray1.TabStop = false;
@@ -182,9 +211,10 @@
             // pictureOriginalGray
             // 
             this.pictureOriginalGray.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureOriginalGray.Location = new System.Drawing.Point(32, 53);
+            this.pictureOriginalGray.Location = new System.Drawing.Point(36, 66);
+            this.pictureOriginalGray.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pictureOriginalGray.Name = "pictureOriginalGray";
-            this.pictureOriginalGray.Size = new System.Drawing.Size(240, 180);
+            this.pictureOriginalGray.Size = new System.Drawing.Size(270, 224);
             this.pictureOriginalGray.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureOriginalGray.TabIndex = 4;
             this.pictureOriginalGray.TabStop = false;
@@ -192,65 +222,226 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(989, 24);
+            this.label4.Location = new System.Drawing.Point(1113, 30);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(69, 16);
+            this.label4.Size = new System.Drawing.Size(80, 20);
             this.label4.TabIndex = 3;
             this.label4.Text = "Разность";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(686, 24);
+            this.label3.Location = new System.Drawing.Point(772, 30);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 16);
+            this.label3.Size = new System.Drawing.Size(92, 20);
             this.label3.TabIndex = 2;
             this.label3.Text = "Формула 2";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(395, 24);
+            this.label2.Location = new System.Drawing.Point(444, 30);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(77, 16);
+            this.label2.Size = new System.Drawing.Size(92, 20);
             this.label2.TabIndex = 1;
             this.label2.Text = "Формула 1";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(62, 24);
+            this.label1.Location = new System.Drawing.Point(70, 30);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(162, 16);
+            this.label1.Size = new System.Drawing.Size(186, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Исходное изображение";
             // 
             // tabPage2
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Controls.Add(this.label13);
+            this.tabPage2.Controls.Add(this.label12);
+            this.tabPage2.Controls.Add(this.label11);
+            this.tabPage2.Controls.Add(this.panelHistBlue);
+            this.tabPage2.Controls.Add(this.panelHistGreen);
+            this.tabPage2.Controls.Add(this.panelHistRed);
+            this.tabPage2.Controls.Add(this.btnRGB);
+            this.tabPage2.Controls.Add(this.label10);
+            this.tabPage2.Controls.Add(this.label9);
+            this.tabPage2.Controls.Add(this.label8);
+            this.tabPage2.Controls.Add(this.label7);
+            this.tabPage2.Controls.Add(this.pictureBlue);
+            this.tabPage2.Controls.Add(this.pictureGreen);
+            this.tabPage2.Controls.Add(this.pictureRed);
+            this.tabPage2.Controls.Add(this.pictureOriginalRGB);
+            this.tabPage2.Location = new System.Drawing.Point(4, 29);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1176, 585);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabPage2.Size = new System.Drawing.Size(1324, 735);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "RGB";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Location = new System.Drawing.Point(4, 29);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1176, 585);
+            this.tabPage3.Size = new System.Drawing.Size(1324, 735);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "HSV ";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // pictureOriginalRGB
+            // 
+            this.pictureOriginalRGB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureOriginalRGB.Location = new System.Drawing.Point(48, 63);
+            this.pictureOriginalRGB.Name = "pictureOriginalRGB";
+            this.pictureOriginalRGB.Size = new System.Drawing.Size(240, 231);
+            this.pictureOriginalRGB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureOriginalRGB.TabIndex = 0;
+            this.pictureOriginalRGB.TabStop = false;
+            // 
+            // pictureRed
+            // 
+            this.pictureRed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureRed.Location = new System.Drawing.Point(397, 63);
+            this.pictureRed.Name = "pictureRed";
+            this.pictureRed.Size = new System.Drawing.Size(240, 231);
+            this.pictureRed.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureRed.TabIndex = 1;
+            this.pictureRed.TabStop = false;
+            // 
+            // pictureGreen
+            // 
+            this.pictureGreen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureGreen.Location = new System.Drawing.Point(726, 63);
+            this.pictureGreen.Name = "pictureGreen";
+            this.pictureGreen.Size = new System.Drawing.Size(240, 231);
+            this.pictureGreen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureGreen.TabIndex = 2;
+            this.pictureGreen.TabStop = false;
+            // 
+            // pictureBlue
+            // 
+            this.pictureBlue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBlue.Location = new System.Drawing.Point(1047, 63);
+            this.pictureBlue.Name = "pictureBlue";
+            this.pictureBlue.Size = new System.Drawing.Size(240, 231);
+            this.pictureBlue.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBlue.TabIndex = 3;
+            this.pictureBlue.TabStop = false;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(44, 40);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(186, 20);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "Исходное изображение";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(393, 40);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(123, 20);
+            this.label8.TabIndex = 5;
+            this.label8.Text = "Красный канал";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(722, 40);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(126, 20);
+            this.label9.TabIndex = 6;
+            this.label9.Text = "Зелёный канал";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(1043, 40);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(105, 20);
+            this.label10.TabIndex = 7;
+            this.label10.Text = "Синий канал";
+            // 
+            // btnRGB
+            // 
+            this.btnRGB.Location = new System.Drawing.Point(1105, 311);
+            this.btnRGB.Name = "btnRGB";
+            this.btnRGB.Size = new System.Drawing.Size(182, 42);
+            this.btnRGB.TabIndex = 8;
+            this.btnRGB.Text = "Выделить каналы";
+            this.btnRGB.UseVisualStyleBackColor = true;
+            this.btnRGB.Click += new System.EventHandler(this.btnRGB_Click);
+            // 
+            // panelHistRed
+            // 
+            this.panelHistRed.BackColor = System.Drawing.Color.White;
+            this.panelHistRed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelHistRed.Location = new System.Drawing.Point(48, 396);
+            this.panelHistRed.Name = "panelHistRed";
+            this.panelHistRed.Size = new System.Drawing.Size(399, 311);
+            this.panelHistRed.TabIndex = 9;
+            this.panelHistRed.Paint += new System.Windows.Forms.PaintEventHandler(this.panelHistRed_Paint);
+            // 
+            // panelHistGreen
+            // 
+            this.panelHistGreen.BackColor = System.Drawing.Color.White;
+            this.panelHistGreen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelHistGreen.Location = new System.Drawing.Point(470, 396);
+            this.panelHistGreen.Name = "panelHistGreen";
+            this.panelHistGreen.Size = new System.Drawing.Size(399, 311);
+            this.panelHistGreen.TabIndex = 10;
+            this.panelHistGreen.Paint += new System.Windows.Forms.PaintEventHandler(this.panelHistGreen_Paint);
+            // 
+            // panelHistBlue
+            // 
+            this.panelHistBlue.BackColor = System.Drawing.Color.White;
+            this.panelHistBlue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelHistBlue.Location = new System.Drawing.Point(888, 396);
+            this.panelHistBlue.Name = "panelHistBlue";
+            this.panelHistBlue.Size = new System.Drawing.Size(399, 311);
+            this.panelHistBlue.TabIndex = 11;
+            this.panelHistBlue.Paint += new System.Windows.Forms.PaintEventHandler(this.panelHistBlue_Paint);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(44, 358);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(125, 20);
+            this.label11.TabIndex = 12;
+            this.label11.Text = "Гистограмма R";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(466, 358);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(126, 20);
+            this.label12.TabIndex = 13;
+            this.label12.Text = "Гистограмма G";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(884, 358);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(124, 20);
+            this.label13.TabIndex = 14;
+            this.label13.Text = "Гистограмма B";
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1182, 653);
+            this.ClientSize = new System.Drawing.Size(1330, 816);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnOpen);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.tabControl1.ResumeLayout(false);
@@ -260,6 +451,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureGray2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureGray1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureOriginalGray)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureOriginalRGB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureRed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureGreen)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBlue)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -284,6 +481,21 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnGray;
+        private System.Windows.Forms.PictureBox pictureBlue;
+        private System.Windows.Forms.PictureBox pictureGreen;
+        private System.Windows.Forms.PictureBox pictureRed;
+        private System.Windows.Forms.PictureBox pictureOriginalRGB;
+        private System.Windows.Forms.Panel panelHistRed;
+        private System.Windows.Forms.Button btnRGB;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Panel panelHistBlue;
+        private System.Windows.Forms.Panel panelHistGreen;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
     }
 }
 
