@@ -458,7 +458,6 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "HSV ";
             this.tabPage3.UseVisualStyleBackColor = true;
-            this.tabPage3.Click += new System.EventHandler(this.tabPage3_Click);
             // 
             // btnSaveHSV
             // 
@@ -479,7 +478,6 @@
             this.labelValueValue.Size = new System.Drawing.Size(99, 20);
             this.labelValueValue.TabIndex = 10;
             this.labelValueValue.Text = "Яркость: 0";
-            this.labelValueValue.Click += new System.EventHandler(this.labelValueValue_Click);
             // 
             // labelSaturationValue
             // 
@@ -490,7 +488,6 @@
             this.labelSaturationValue.Size = new System.Drawing.Size(155, 20);
             this.labelSaturationValue.TabIndex = 9;
             this.labelSaturationValue.Text = "Насыщенность: 0";
-            this.labelSaturationValue.Click += new System.EventHandler(this.labelSaturationValue_Click);
             // 
             // labelHueValue
             // 
@@ -500,7 +497,6 @@
             this.labelHueValue.Size = new System.Drawing.Size(163, 33);
             this.labelHueValue.TabIndex = 8;
             this.labelHueValue.Text = "Оттенок: 0° ";
-            this.labelHueValue.Click += new System.EventHandler(this.labelHueValue_Click);
             // 
             // trackValue
             // 
@@ -544,7 +540,6 @@
             this.label14.Size = new System.Drawing.Size(97, 20);
             this.label14.TabIndex = 3;
             this.label14.Text = "Результат";
-            this.label14.Click += new System.EventHandler(this.label14_Click_1);
             // 
             // pictureResultHSV
             // 
@@ -555,7 +550,6 @@
             this.pictureResultHSV.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureResultHSV.TabIndex = 2;
             this.pictureResultHSV.TabStop = false;
-            this.pictureResultHSV.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // labelOriginalHSV
             // 
@@ -566,7 +560,6 @@
             this.labelOriginalHSV.Size = new System.Drawing.Size(205, 20);
             this.labelOriginalHSV.TabIndex = 1;
             this.labelOriginalHSV.Text = "Исходное изображение";
-            this.labelOriginalHSV.Click += new System.EventHandler(this.label14_Click);
             // 
             // pictureOriginalHSV
             // 

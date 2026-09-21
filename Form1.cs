@@ -15,6 +15,7 @@ namespace Lab2
     {
         private Bitmap originalImage;
 
+        //задание 1 - Оттенки серого
         private Bitmap grayImage1;
         private Bitmap grayImage2;
         private Bitmap differenceImage;
@@ -22,11 +23,13 @@ namespace Lab2
         private int[] histGray1;
         private int[] histGray2;
 
+        //задание 2 - RGB
         private Bitmap redImage;
         private Bitmap greenImage;
         private Bitmap blueImage;
         private Bitmap hsvImage;
 
+        //задание 3
         private struct HSV
         {
             public double H;
@@ -37,6 +40,7 @@ namespace Lab2
         private int[] histGreen;
         private int[] histBlue;
 
+        //задание 1 - оттенки серого
         private Bitmap MakeGray1(Bitmap source)
         {
             return source.Select(color =>
@@ -55,6 +59,7 @@ namespace Lab2
             });
         }
 
+        //задание 2 - RGB
         private Bitmap MakeRed(Bitmap source)
         {
             return source.Select(color =>
@@ -193,6 +198,8 @@ namespace Lab2
                 g.DrawLine(pen, x, height, x, height - lineHeight);
             }
         }
+
+        //задание 3
         private HSV RgbToHsv(Color color)
         {
             double r = color.R / 255.0;
@@ -325,7 +332,7 @@ namespace Lab2
         {
             InitializeComponent();
         }
-
+        //обработчики задания 1
         private void btnOpen_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
@@ -386,6 +393,7 @@ namespace Lab2
             DrawHistogram(e.Graphics, histGray2, panelHistGray2.Width, panelHistGray2.Height);
         }
 
+        //обработчики задания 2
         private void btnRGB_Click(object sender, EventArgs e)
         {
             if (originalImage == null)
@@ -444,25 +452,7 @@ namespace Lab2
             );
         }
 
-        private void label14_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label14_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labelHueValue_Click(object sender, EventArgs e)
-        {
-
-        }
+        //обработчики задания 3
         private void trackHSV_Scroll(object sender, EventArgs e)
         {
             labelHueValue.Text = "Оттенок: " + trackHue.Value + "°";
@@ -485,21 +475,6 @@ namespace Lab2
 
             if (dialog.ShowDialog() == DialogResult.OK)
                 hsvImage.Save(dialog.FileName, ImageFormat.Png);
-        }
-
-        private void tabPage3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labelSaturationValue_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labelValueValue_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
