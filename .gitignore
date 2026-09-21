@@ -1,18 +1,21 @@
-# Build and Release Folders
-bin-debug/
-bin-release/
-[Oo]bj/
+## Visual Studio / .NET
+.vs/
 [Bb]in/
+[Oo]bj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
 
-# Other files and folders
-.settings/
+## ReSharper (если используешь)
+_ReSharper*/
+*.[Rr]e[Ss]harper
 
-# Executables
-*.swf
-*.air
-*.ipa
-*.apk
+## Файлы VS Code (на всякий случай)
+.vscode/
 
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+## Файлы Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FastBitmap;
-
+using System.Drawing.Imaging;
 namespace Lab2
 {
     public partial class Form1 : Form
@@ -25,7 +25,14 @@ namespace Lab2
         private Bitmap redImage;
         private Bitmap greenImage;
         private Bitmap blueImage;
+        private Bitmap hsvImage;
 
+        private struct HSV
+        {
+            public double H;
+            public double S;
+            public double V;
+        }
         private int[] histRed;
         private int[] histGreen;
         private int[] histBlue;
@@ -186,7 +193,134 @@ namespace Lab2
                 g.DrawLine(pen, x, height, x, height - lineHeight);
             }
         }
+        private HSV RgbToHsv(Color color)
+        {
+            double r = color.R / 255.0;
+            double g = color.G / 255.0;
+            double b = color.B / 255.0;
 
+            double max = Math.Max(r, Math.Max(g, b));
+            double min = Math.Min(r, Math.Min(g, b));
+
+            double h;
+
+            if (max == min)
+                h = 0;
+            else if (max == r && g >= b)
+                h = 60 * (g - b) / (max - min);
+            else if (max == r && g < b)
+                h = 60 * (g - b) / (max - min) + 360;
+            else if (max == g)
+                h = 60 * (b - r) / (max - min) + 120;
+            else
+                h = 60 * (r - g) / (max - min) + 240;
+
+            double s;
+
+            if (max == 0)
+                s = 0;
+            else
+                s = 1 - min / max;
+
+            double v = max;
+
+            HSV hsv;
+            hsv.H = h;
+            hsv.S = s;
+            hsv.V = v;
+
+            return hsv;
+        }
+
+        private Color HsvToRgb(HSV hsv)
+        {
+            double h = hsv.H;
+            double s = hsv.S;
+            double v = hsv.V;
+
+            int hi = (int)Math.Floor(h / 60) % 6;
+            double f = h / 60 - Math.Floor(h / 60);
+
+            double p = v * (1 - s);
+            double q = v * (1 - f * s);
+            double t = v * (1 - (1 - f) * s);
+
+            double r = 0;
+            double g = 0;
+            double b = 0;
+
+            switch (hi)
+            {
+                case 0:
+                    r = v;
+                    g = t;
+                    b = p;
+                    break;
+
+                case 1:
+                    r = q;
+                    g = v;
+                    b = p;
+                    break;
+
+                case 2:
+                    r = p;
+                    g = v;
+                    b = t;
+                    break;
+
+                case 3:
+                    r = p;
+                    g = q;
+                    b = v;
+                    break;
+
+                case 4:
+                    r = t;
+                    g = p;
+                    b = v;
+                    break;
+
+                case 5:
+                    r = v;
+                    g = p;
+                    b = q;
+                    break;
+            }
+
+            return Color.FromArgb(
+                (int)Math.Round(r * 255),
+                (int)Math.Round(g * 255),
+                (int)Math.Round(b * 255)
+            );
+        }
+
+        private void UpdateHSV()
+        {
+            if (originalImage == null)
+                return;
+
+            int hueChange = trackHue.Value;
+            double saturationChange = trackSaturation.Value / 100.0;
+            double valueChange = trackValue.Value / 100.0;
+
+            Bitmap newImage = originalImage.Select(color =>
+            {
+                HSV hsv = RgbToHsv(color);
+
+                hsv.H = (hsv.H + hueChange + 360) % 360;
+                hsv.S = Math.Max(0, Math.Min(1, hsv.S + saturationChange));
+                hsv.V = Math.Max(0, Math.Min(1, hsv.V + valueChange));
+
+                return HsvToRgb(hsv);
+            });
+
+            if (hsvImage != null)
+                hsvImage.Dispose();
+
+            hsvImage = newImage;
+            pictureResultHSV.Image = hsvImage;
+        }
         public Form1()
         {
             InitializeComponent();
@@ -204,6 +338,17 @@ namespace Lab2
 
                 pictureOriginalGray.Image = originalImage;
                 pictureOriginalRGB.Image = originalImage;
+                pictureOriginalHSV.Image = originalImage;
+
+                trackHue.Value = 0;
+                trackSaturation.Value = 0;
+                trackValue.Value = 0;
+
+                labelHueValue.Text = "Оттенок: 0°";
+                labelSaturationValue.Text = "Насыщенность: 0";
+                labelValueValue.Text = "Яркость: 0";
+
+                UpdateHSV();
             }
         }
 
@@ -297,6 +442,64 @@ namespace Lab2
                 panelHistBlue.Height,
                 Pens.Blue
             );
+        }
+
+        private void label14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label14_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelHueValue_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void trackHSV_Scroll(object sender, EventArgs e)
+        {
+            labelHueValue.Text = "Оттенок: " + trackHue.Value + "°";
+            labelSaturationValue.Text = "Насыщенность: " + trackSaturation.Value;
+            labelValueValue.Text = "Яркость: " + trackValue.Value;
+
+            UpdateHSV();
+        }
+        private void btnSaveHSV_Click(object sender, EventArgs e)
+        {
+            if (hsvImage == null)
+            {
+                MessageBox.Show("Сначала загрузите изображение.");
+                return;
+            }
+
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "PNG изображение|*.png";
+            dialog.FileName = "HSV_result.png";
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+                hsvImage.Save(dialog.FileName, ImageFormat.Png);
+        }
+
+        private void tabPage3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelSaturationValue_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelValueValue_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
