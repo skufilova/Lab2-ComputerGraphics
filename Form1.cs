@@ -213,10 +213,22 @@ namespace Lab2
 
             for (int i = 0; i < 256; i++)
             {
-                float x = i * width / 256f;
-                float lineHeight = histogram[i] * height / (float)max;
+                int x1 = i * width / 256;
+                int x2 = (i + 1) * width / 256;
+                int barWidth = Math.Max(1, x2 - x1);
 
-                g.DrawLine(pen, x, height, x, height - lineHeight);
+                float barHeight = histogram[i] * height / (float)max;
+
+                using (Brush brush = new SolidBrush(pen.Color))
+                {
+                    g.FillRectangle(
+                        brush,
+                        x1,
+                        height - barHeight,
+                        barWidth,
+                        barHeight
+                    );
+                }
             }
         }
 
