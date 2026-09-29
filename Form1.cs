@@ -37,7 +37,7 @@ namespace Lab2
             public double S;
             public double V;
         }
- 
+      
 
         //задание 1 - оттенки серого
         private Bitmap MakeGray1(Bitmap source)
@@ -293,30 +293,47 @@ namespace Lab2
                     b = q;
                     break;
             }
+            
+            int R = (int)Math.Round(r * 255);
+            int G = (int)Math.Round(g * 255);
+            int B = (int)Math.Round(b * 255);
+
+            
+            if (s >= 1.0)
+            {
+                int min = Math.Min(R, Math.Min(G, B));
+                if (min != 0)
+                {
+                    R -= min;
+                    G -= min;
+                    B -= min;
+                }
+            }
 
             return Color.FromArgb(
-                (int)Math.Round(r * 255),
-                (int)Math.Round(g * 255),
-                (int)Math.Round(b * 255)
+                Math.Max(0, Math.Min(255, R)),
+                Math.Max(0, Math.Min(255, G)),
+                Math.Max(0, Math.Min(255, B))
             );
         }
 
         private void UpdateHSV()
         {
-            if (originalImage == null)
-                return;
+            if (originalImage == null) return;
 
-            int hueChange = trackHue.Value;
-            double saturationChange = trackSaturation.Value / 100.0;
-            double valueChange = trackValue.Value / 100.0;
+            double targetHue = trackHue.Value;
+            double targetS = Math.Max(0.0, Math.Min(1.0, trackSaturation.Value / 100.0));
+            double targetV = Math.Max(0.0, Math.Min(1.0, trackValue.Value / 100.0));
 
             Bitmap newImage = originalImage.Select(color =>
             {
                 HSV hsv = RgbToHsv(color);
 
-                hsv.H = (hsv.H + hueChange + 360) % 360;
-                hsv.S = Math.Max(0, Math.Min(1, hsv.S + saturationChange));
-                hsv.V = Math.Max(0, Math.Min(1, hsv.V + valueChange));
+                hsv.H = (hsv.H + targetHue) % 360;
+                if (hsv.H < 0) hsv.H += 360;
+
+                hsv.S = targetS;  
+                hsv.V = targetV;   
 
                 return HsvToRgb(hsv);
             });
@@ -327,9 +344,56 @@ namespace Lab2
             hsvImage = newImage;
             pictureResultHSV.Image = hsvImage;
         }
+        
+        private (double avgS, double avgV, double minS, double maxS) MeasureActualSV(Bitmap image)
+        {
+            double sumS = 0, sumV = 0;
+            double minS = double.MaxValue, maxS = double.MinValue;
+            int count = 0;
+
+            image.ForEach(color =>
+            {
+                int max = Math.Max(color.R, Math.Max(color.G, color.B));
+                int min = Math.Min(color.R, Math.Min(color.G, color.B));
+
+                if (max == 0) return; 
+
+                double s = 1.0 - (double)min / max;
+                double v = max / 255.0;
+
+                sumS += s;
+                sumV += v;
+                if (s < minS) minS = s;
+                if (s > maxS) maxS = s;
+                count++;
+            });
+
+            if (count == 0) return (0, 0, 0, 0);
+
+            return (sumS / count, sumV / count, minS, maxS);
+        }
         public Form1()
         {
             InitializeComponent();
+
+            // Настройка ползунков для задания 3
+            trackHue.Minimum = 0;
+            trackHue.Maximum = 360;
+            trackHue.TickFrequency = 30;
+            trackHue.Value = 0;
+
+            trackSaturation.Minimum = 0;
+            trackSaturation.Maximum = 100;
+            trackSaturation.TickFrequency = 10;
+            trackSaturation.Value = 0;
+
+            trackValue.Minimum = 0;
+            trackValue.Maximum = 100;
+            trackValue.TickFrequency = 10;
+            trackValue.Value = 0;
+            labelHueValue.Text = "Оттенок: 0°";
+            labelSaturationValue.Text = "Насыщенность: 0";
+            labelValueValue.Text = "Яркость: 0";
         }
 
         // загрузка изображения
@@ -347,14 +411,13 @@ namespace Lab2
                 pictureOriginalRGB.Image = originalImage;
                 pictureOriginalHSV.Image = originalImage;
 
-                trackHue.Value = 0;
-                trackSaturation.Value = 0;
-                trackValue.Value = 0;
+                trackHue.Value = 180;
+                trackSaturation.Value = 50;
+                trackValue.Value = 50;
 
-                labelHueValue.Text = "Оттенок: 0°";
-                labelSaturationValue.Text = "Насыщенность: 0";
-                labelValueValue.Text = "Яркость: 0";
-
+                labelHueValue.Text = "Оттенок: 180°";
+                labelSaturationValue.Text = "Насыщенность: 50";
+                labelValueValue.Text = "Яркость: 50";
                 UpdateHSV();
             }
         }
@@ -457,7 +520,7 @@ namespace Lab2
         private void trackHSV_Scroll(object sender, EventArgs e)
         {
             labelHueValue.Text = "Оттенок: " + trackHue.Value + "°";
-            labelSaturationValue.Text = "Насыщенность: " + trackSaturation.Value;
+            labelSaturationValue.Text = "Насыщенность:" + trackSaturation.Value;
             labelValueValue.Text = "Яркость: " + trackValue.Value;
 
             UpdateHSV();
