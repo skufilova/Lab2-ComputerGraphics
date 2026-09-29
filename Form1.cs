@@ -65,6 +65,8 @@ namespace Lab2
             using (var fastSecond = new FastBitmap.FastBitmap(second))
             using (var fastResult = new FastBitmap.FastBitmap(result))
             {
+                int minDifference = int.MaxValue;
+
                 for (int y = 0; y < first.Height; y++)
                 {
                     for (int x = 0; x < first.Width; x++)
@@ -72,10 +74,26 @@ namespace Lab2
                         Color color1 = fastFirst[x, y];
                         Color color2 = fastSecond[x, y];
 
-                        int difference = Math.Abs(color1.R - color2.R);
+                        int difference = color1.R - color2.R;
 
-                        fastResult[x, y] =
-                            Color.FromArgb(difference, difference, difference);
+                        if (difference < minDifference)
+                            minDifference = difference;
+                    }
+                }
+
+                int shift = -minDifference;
+
+                for (int y = 0; y < first.Height; y++)
+                {
+                    for (int x = 0; x < first.Width; x++)
+                    {
+                        Color color1 = fastFirst[x, y];
+                        Color color2 = fastSecond[x, y];
+
+                        int difference = color1.R - color2.R;
+                        int shiftedDifference = difference + shift;
+
+                        fastResult[x, y] = Color.FromArgb(shiftedDifference, shiftedDifference, shiftedDifference);
                     }
                 }
             }
@@ -109,9 +127,13 @@ namespace Lab2
 
             for (int i = 0; i < 256; i++)
             {
-                float x = i * width / 256f;
-                float lineHeight = histogram[i] * height / (float)max;
-                g.DrawLine(Pens.Black, x, height, x, height - lineHeight);
+                int x1 = i * width / 256;
+                int x2 = (i + 1) * width / 256;
+                int barWidth = Math.Max(1, x2 - x1);
+
+                float barHeight = histogram[i] * height / (float)max;
+
+                g.FillRectangle(Brushes.Black, x1, height - barHeight, barWidth, barHeight);
             }
         }
 
