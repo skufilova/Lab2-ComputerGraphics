@@ -355,19 +355,21 @@ namespace Lab2
         {
             if (originalImage == null) return;
 
-            double targetHue = trackHue.Value;
-            double targetS = Math.Max(0.0, Math.Min(1.0, trackSaturation.Value / 100.0));
-            double targetV = Math.Max(0.0, Math.Min(1.0, trackValue.Value / 100.0));
+            double hueShift = trackHue.Value;                  
+            double sShift = trackSaturation.Value / 100.0;  
+            double vShift = trackValue.Value / 100.0;        
 
             Bitmap newImage = originalImage.Select(color =>
             {
                 HSV hsv = RgbToHsv(color);
 
-                hsv.H = (hsv.H + targetHue) % 360;
+               
+                hsv.H = (hsv.H + hueShift) % 360;
                 if (hsv.H < 0) hsv.H += 360;
 
-                hsv.S = targetS;  
-                hsv.V = targetV;   
+               
+                hsv.S = Math.Max(0.0, Math.Min(1.0, hsv.S + sShift));
+                hsv.V = Math.Max(0.0, Math.Min(1.0, hsv.V + vShift));
 
                 return HsvToRgb(hsv);
             });
@@ -378,7 +380,7 @@ namespace Lab2
             hsvImage = newImage;
             pictureResultHSV.Image = hsvImage;
         }
-        
+
         private (double avgS, double avgV, double minS, double maxS) MeasureActualSV(Bitmap image)
         {
             double sumS = 0, sumV = 0;
@@ -409,22 +411,19 @@ namespace Lab2
         public Form1()
         {
             InitializeComponent();
-
-            // Настройка ползунков для задания 3
-            trackHue.Minimum = 0;
-            trackHue.Maximum = 360;
-            trackHue.TickFrequency = 30;
-            trackHue.Value = 0;
-
-            trackSaturation.Minimum = 0;
+            trackSaturation.Minimum = -100;
             trackSaturation.Maximum = 100;
             trackSaturation.TickFrequency = 10;
             trackSaturation.Value = 0;
 
-            trackValue.Minimum = 0;
+            trackValue.Minimum = -100;
             trackValue.Maximum = 100;
             trackValue.TickFrequency = 10;
             trackValue.Value = 0;
+            trackHue.Minimum = 0;
+            trackHue.Maximum = 360;
+            trackHue.TickFrequency = 30;
+            trackHue.Value = 0;
             labelHueValue.Text = "Оттенок: 0°";
             labelSaturationValue.Text = "Насыщенность: 0";
             labelValueValue.Text = "Яркость: 0";
@@ -434,7 +433,6 @@ namespace Lab2
         private void btnOpen_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
-
             dialog.Filter = "Изображения|*.jpg;*.jpeg;*.png;*.bmp";
 
             if (dialog.ShowDialog() == DialogResult.OK)
@@ -445,14 +443,21 @@ namespace Lab2
                 pictureOriginalRGB.Image = originalImage;
                 pictureOriginalHSV.Image = originalImage;
 
-                trackHue.Value = 180;
-                trackSaturation.Value = 50;
-                trackValue.Value = 50;
+               
+                trackHue.Value = 0;
+                trackSaturation.Value = 0;
+                trackValue.Value = 0;
 
-                labelHueValue.Text = "Оттенок: 180°";
-                labelSaturationValue.Text = "Насыщенность: 50";
-                labelValueValue.Text = "Яркость: 50";
-                UpdateHSV();
+                labelHueValue.Text = "Оттенок: 0°";
+                labelSaturationValue.Text = "Насыщенность: 0";
+                labelValueValue.Text = "Яркость: 0";
+
+                
+                if (hsvImage != null)
+                    hsvImage.Dispose();
+
+                hsvImage = new Bitmap(originalImage); 
+                pictureResultHSV.Image = hsvImage;
             }
         }
 
@@ -554,7 +559,7 @@ namespace Lab2
         private void trackHSV_Scroll(object sender, EventArgs e)
         {
             labelHueValue.Text = "Оттенок: " + trackHue.Value + "°";
-            labelSaturationValue.Text = "Насыщенность:" + trackSaturation.Value;
+            labelSaturationValue.Text = "Насыщенность: " + trackSaturation.Value;
             labelValueValue.Text = "Яркость: " + trackValue.Value;
 
             UpdateHSV();
